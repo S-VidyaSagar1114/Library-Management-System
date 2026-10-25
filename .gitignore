@@ -1,0 +1,20 @@
+# Compiled output
+bin/
+out/
+*.class
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Crash and log files
+*.log
+hs_err_pid*
