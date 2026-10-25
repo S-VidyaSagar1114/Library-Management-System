@@ -5,82 +5,95 @@ import java.util.Date;
 
 // Represents a book loan transaction in the library
 public class Loan {
-    // private fields for data encapsulation
-    private Book book;
-    private Member member;
-    private Date issueDate;
-    private Date dueDate;
-    private Date returnDate;
 
-    // Constructor 1: creates a loan for an issued book with calculated due date
-    public Loan(Book book, Member member) {
-        // this keyword assigns parameters to object fields
-        this.book = book;
-        this.member = member;
-        this.issueDate = new Date();
-        // Calendar from java.util package is used to calculate due date
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(issueDate);
-        cal.add(Calendar.DAY_OF_MONTH, member.getLoanDays());
-        this.dueDate = cal.getTime();
-        this.returnDate = null;
+
+private int loanId;
+private Book book;
+private Member member;
+private Date issueDate;
+private Date dueDate;
+private Date returnDate;
+
+// Constructor 1: creates a new loan
+public Loan(Book book, Member member) {
+    this(0, book, member, new Date(), null, null);
+
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(this.issueDate);
+    cal.add(Calendar.DAY_OF_MONTH, member.getLoanDays());
+    this.dueDate = cal.getTime();
+}
+
+// Constructor 2: creates a loan with explicitly provided dates
+public Loan(Book book, Member member, Date issueDate,
+            Date dueDate, Date returnDate) {
+    this(0, book, member, issueDate, dueDate, returnDate);
+}
+
+// Constructor 3: creates a loan with an explicit loan ID
+public Loan(int loanId, Book book, Member member, Date issueDate,
+            Date dueDate, Date returnDate) {
+    this.loanId = loanId;
+    this.book = book;
+    this.member = member;
+    this.issueDate = issueDate;
+    this.dueDate = dueDate;
+    this.returnDate = returnDate;
+}
+
+public int getLoanId() {
+    return loanId;
+}
+
+public void setLoanId(int loanId) {
+    this.loanId = loanId;
+}
+
+public Book getBook() {
+    return book;
+}
+
+public Member getMember() {
+    return member;
+}
+
+public Date getIssueDate() {
+    return issueDate;
+}
+
+public Date getDueDate() {
+    return dueDate;
+}
+
+public Date getReturnDate() {
+    return returnDate;
+}
+
+public void setReturnDate(Date returnDate) {
+    this.returnDate = returnDate;
+}
+
+public boolean isReturned() {
+    return returnDate != null;
+}
+
+@Override
+public String toString() {
+  
+  String status;
+
+    if (isReturned()) {
+        status = "Returned on " + returnDate;
+    } else {
+        status = "Due by " + dueDate;
     }
 
-    // Constructor 2: creates a loan with all dates explicitly provided
-    // constructor overloading
-    public Loan(Book book, Member member, Date issueDate, Date dueDate, Date returnDate) {
-        // this keyword refers to the current object's fields
-        this.book = book;
-        this.member = member;
-        this.issueDate = issueDate;
-        this.dueDate = dueDate;
-        this.returnDate = returnDate;
-    }
+    return "Loan ID: " + loanId
+            + " | Book: " + book.getTitle()
+            + " | Member: " + member.getName()
+            + " | Issued: " + issueDate
+            + " | " + status;
+}
 
-    // returns the borrowed book
-    public Book getBook() {
-        return book;
-    }
 
-    // returns the member who borrowed the book
-    public Member getMember() {
-        return member;
-    }
-
-    // returns the date the book was issued
-    public Date getIssueDate() {
-        return issueDate;
-    }
-
-    // returns the due date for returning the book
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    // returns the date the book was returned
-    public Date getReturnDate() {
-        return returnDate;
-    }
-
-    // sets the return date when the book is returned
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    // returns true if the book has been returned
-    public boolean isReturned() {
-        return returnDate != null;
-    }
-
-    // method overriding of Object.toString() to display loan details
-    @Override
-    public String toString() {
-        String status;
-        if (isReturned()) {
-            status = "Returned on " + returnDate;
-        } else {
-            status = "Due by " + dueDate;
-        }
-        return "Loan [Book: " + book.getTitle() + " | Member: " + member.getName() + " | Issued: " + issueDate + " | " + status + "]";
-    }
 }
