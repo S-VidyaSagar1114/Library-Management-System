@@ -7,16 +7,16 @@ import java.util.Date;
 public class Loan {
 
 
-private int loanId;
-private Book book;
-private Member member;
-private Date issueDate;
-private Date dueDate;
-private Date returnDate;
+    private int loanId;
+    private Book book;
+    private Member member;
+    private Date issueDate;
+    private Date dueDate;
+    private Date returnDate;
 
 // Constructor 1: creates a new loan
-public Loan(Book book, Member member) {
-    this(0, book, member, new Date(), null, null);
+    public Loan(Book book, Member member) {
+        this(0, book, member, new Date(), null, null);
 
     Calendar cal = Calendar.getInstance();
     cal.setTime(this.issueDate);

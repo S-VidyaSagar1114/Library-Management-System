@@ -43,7 +43,7 @@ public List<Book> getAllBooks() {
     return new ArrayList<>(books);
 }
 
-@Override
+
 public Book searchBookById(int bookId)
         throws BookNotFoundException {
 
@@ -57,7 +57,7 @@ public Book searchBookById(int bookId)
             "Book not found with ID: " + bookId);
 }
 
-@Override
+
 public List<Book> searchBooksByTitle(String title) {
     List<Book> results = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public List<Book> searchBooksByTitle(String title) {
     return results;
 }
 
-@Override
+
 public List<Book> searchBooksByAuthor(String author) {
     List<Book> results = new ArrayList<>();
 
@@ -129,7 +129,7 @@ private Member findMemberById(int memberId)
             "Member not found with ID: " + memberId);
 }
 
-@Override
+
 public Loan issueBook(int bookId, int memberId)
         throws BookNotFoundException,
                MemberNotFoundException,
@@ -160,7 +160,6 @@ public Loan issueBook(int bookId, int memberId)
     return loan;
 }
 
-@Override
 public void returnBook(int loanId) throws LoanNotFoundException {
     Loan targetLoan = null;
 
